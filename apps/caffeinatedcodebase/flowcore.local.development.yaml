@@ -1,0 +1,13 @@
+version: 1
+development:
+  proxyEndpoints:
+    blog-posts:
+      dataCore: caffeinatedcodebase
+      flowType: blog.post.0
+      events:
+        - blog.post.created.0
+        - blog.post.updated.0
+        - blog.post.archived.0
+      endpoints:
+        - "blog-posts"
+        - "audits"

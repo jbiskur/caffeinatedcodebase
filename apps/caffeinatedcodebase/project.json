@@ -17,6 +17,44 @@
         "write": false,
         "unsafe": false
       }
+    },
+    "db:push": {
+      "command": "drizzle-kit push --url=$POSTGRES_URL",
+      "options": {
+        "forwardAllArgs": true,
+        "cwd": "apps/caffeinatedcodebase",
+        "envFile": ".env",
+        "args": [
+          "--schema=src/database/schemas.ts",
+          "--dialect=postgresql"
+        ]
+      }
+    },
+    "docker": {
+      "command": "docker compose up -d",
+      "options": {
+        "cwd": "apps/caffeinatedcodebase"
+      }
+    },
+    "flowcore:apply": {
+      "command": "flowcore apply -f flowcore.yaml",
+      "options": {
+        "cwd": "apps/caffeinatedcodebase"
+      }
+    },
+    "local:stream": {
+      "command": "flowcore scenario local -f flowcore.yaml -f flowcore.local.development.yaml -s now -e http://localhost:3001/api/transform -H \"X-Secret: $TRANSFORMER_SECRET\"",
+      "options": {
+        "cwd": "apps/caffeinatedcodebase",
+        "envFile": ".env"
+      }
+    },
+    "local:stream:backlog": {
+      "command": "flowcore scenario local -f flowcore.yaml -f flowcore.local.development.yaml -e http://localhost:3000/api/transform -H \"X-Secret: $TRANSFORMER_SECRET\"",
+      "options": {
+        "cwd": "apps/caffeinatedcodebase",
+        "envFile": ".env"
+      }
     }
   }
 }
