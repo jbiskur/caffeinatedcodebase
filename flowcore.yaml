@@ -1,0 +1,40 @@
+version: 1
+tenant: jbiskur
+dataCore:
+  name: caffeinatedcodebase
+  deleteProtection: true
+  isPublic: false
+  description: This data core contains the data for the Caffeinatedcodebase application
+  flowTypes:
+    blog-post.0:
+      description: Blog posts for the caffeinated codebase website
+      eventTypes:
+        blog-post.created.0:
+          description: blog-post created event
+        blog-post.updated.0:
+          description: blog-post updated event
+        blog-post.archived.0:
+          description: blog-post archived event
+scenario:
+  name: caffeinatedcodebase
+  description: This scenario is used for development of the Caffeinatedcodebase application
+  transformers:
+    blog-posts:
+      description: blog-posts transformer
+      dataCore: caffeinatedcodebase
+      flowType: blog-post.0
+      events:
+        - blog-post.created.0
+        - blog-post.updated.0
+        - blog-post.archived.0
+      parameters:
+        - name: PROXY_ENDPOINT
+          type: manual
+          value: >-
+            https://caffeinatedcodebase.com/api/transform/blog-posts.0,https://caffeinatedcodebase.com/api/transform/audit.0
+        - name: PROXY_HEADER_SECRET
+          type: secret
+          value: caffeinatedcodebase-transformer-secret
+      blueprint:
+        artifactUrl: >-
+          https://flowcore-public-runtimes.s3.eu-west-1.amazonaws.com/transformer-proxy-1.4.1.zip
