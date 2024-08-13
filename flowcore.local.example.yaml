@@ -1,0 +1,4 @@
+tenant: <some tenant>
+dataCore:
+  name: caffeinatedcodebase-dev
+  isPublic: false
