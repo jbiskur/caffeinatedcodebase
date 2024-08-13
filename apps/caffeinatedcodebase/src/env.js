@@ -14,6 +14,7 @@ export const env = createEnv({
     FLOWCORE_DATACORE: z.string(),
     FLOWCORE_KEY: z.string(),
     CLERK_SECRET_KEY: z.string(),
+    CLERK_CONTROL_ORGANIZATION_ID: z.string(),
     TRANSFORMER_SECRET: z.string(),
     NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
     REDIS_URL: z.string(),
@@ -25,7 +26,9 @@ export const env = createEnv({
    * isn't built with invalid env vars. To expose them to the client, prefix them with
    * `NEXT_PUBLIC_`.
    */
-  client: {},
+  client: {
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),
+  },
 
   /**
    * You can't destruct `process.env` as a regular object in the Next.js edge runtimes (e.g.
@@ -38,6 +41,7 @@ export const env = createEnv({
     FLOWCORE_TENANT: process.env.FLOWCORE_TENANT,
     FLOWCORE_DATACORE: process.env.FLOWCORE_DATACORE,
     FLOWCORE_KEY: process.env.FLOWCORE_KEY,
+    CLERK_CONTROL_ORGANIZATION_ID: process.env.CLERK_CONTROL_ORGANIZATION_ID,
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
     CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
     TRANSFORMER_SECRET: process.env.TRANSFORMER_SECRET,

@@ -1,6 +1,11 @@
 import { SignOutButton, SignedIn } from "@clerk/nextjs"
+import { auth } from "@clerk/nextjs/server"
+export default async function Index() {
+  const { orgId } = await auth()
 
-export default function Index() {
+  if (!orgId || orgId !== process.env.CLERK_CONTROL_ORGANIZATION_ID) {
+    return <div>You are not authorized to view this page.</div>
+  }
   /*
    * Replace the elements below with your own.
    *
@@ -15,7 +20,7 @@ export default function Index() {
               <span> Hello there, </span>
               Welcome caffeinatedcodebase 👋
               <SignedIn>
-                <span>You&apos;re up and running</span>
+                <span>You&apos;re up and running: {orgId}</span>
                 <SignOutButton />
               </SignedIn>
             </h1>
