@@ -1,3 +1,4 @@
+import { ClerkProvider } from '@clerk/nextjs';
 import './global.css';
 
 export const metadata = {
@@ -12,7 +13,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <ClerkProvider appearance={{
+        elements: {
+          footer: "hidden",
+        },
+      }}>
       <body>{children}</body>
+      </ClerkProvider>
     </html>
   );
 }
