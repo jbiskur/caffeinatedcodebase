@@ -1,11 +1,11 @@
-import { and, asc, desc, eq, ilike, type SQL } from "drizzle-orm"
+import { type SQL, and, asc, desc, eq, ilike } from "drizzle-orm"
 
-import { SearchableScrollPaginationInput } from "@/contracts/pagination/scroll"
-import { db } from "@/database"
-import { protectedProcedure } from "@/server/api/trpc"
 import { type BlogPost } from "@/contracts/blog-posts/blog-post"
 import { type ScrollBlogPostResult } from "@/contracts/blog-posts/scroll-blog-posts"
+import { SearchableScrollPaginationInput } from "@/contracts/pagination/scroll"
+import { db } from "@/database"
 import { blogPosts } from "@/database/schemas"
+import { protectedProcedure } from "@/server/api/trpc"
 import { BlogPostService } from "@/server/services/blog-post.service"
 
 export const getBlogPostListProcedure = protectedProcedure
@@ -21,9 +21,7 @@ export const getBlogPostListProcedure = protectedProcedure
 
       switch (sorting.id) {
         case "createdAt":
-          orderBy = sorting.desc
-            ? [desc(blogPosts.id)]
-            : [asc(blogPosts.id)]
+          orderBy = sorting.desc ? [desc(blogPosts.id)] : [asc(blogPosts.id)]
           break
         default:
           orderBy = [desc(blogPosts.createdAt)]
@@ -31,10 +29,8 @@ export const getBlogPostListProcedure = protectedProcedure
       }
     }
 
-    const inputSearchTerm = `${"%"+ input.searchTerm +"%"}`;
-    const searchConditions = input.searchTerm
-      ? ilike(blogPosts.id, inputSearchTerm)
-      : undefined
+    const inputSearchTerm = `${"%" + input.searchTerm + "%"}`
+    const searchConditions = input.searchTerm ? ilike(blogPosts.id, inputSearchTerm) : undefined
 
     const profileResult = await db
       .select()
@@ -64,5 +60,3 @@ export const getBlogPostListProcedure = protectedProcedure
       nextCursor,
     }
   })
-
-

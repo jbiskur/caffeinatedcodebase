@@ -17,15 +17,15 @@ export const webhookClient = webhookFactory({
         secret: process.env.TRANSFORMER_SECRET ?? "",
       },
   redisPredicateCheck: {
-    url: process.env.REDIS_URL ?? "",
-    keyPrefix: process.env.REDIS_KEY_PATTERN ?? "",
+    url: process.env.KV_URL ?? "",
+    keyPrefix: process.env.KV_KEY_PATTERN ?? "",
     retryCount: 20,
     retryDelayMs: 250,
   },
 })
 
 export const eventTransformClient = eventTransformerFactory({
-  redisUrl: process.env.REDIS_URL ?? "",
-  redisEventIdKey: process.env.REDIS_KEY_PATTERN ?? "",
+  redisUrl: process.env.KV_URL ?? "",
+  redisEventIdKey: process.env.KV_KEY_PATTERN ?? "",
   secret: process.env.TRANSFORMER_SECRET ?? "",
 })

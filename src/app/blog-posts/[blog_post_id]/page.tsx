@@ -10,8 +10,8 @@ import ConfirmInputDialog from "@/components/molecules/dialogs/confirm-input.dia
 import { Button } from "@/components/ui/button"
 import { Translated } from "@/components/ui/translation/translated"
 import { useTranslation } from "@/components/ui/translation/use-translation"
-import { updateBlogPostSchema } from "@/contracts/blog-posts/mutate-blog-posts"
 import { type BlogPost } from "@/contracts/blog-posts/blog-post"
+import { updateBlogPostSchema } from "@/contracts/blog-posts/mutate-blog-posts"
 import { api } from "@/trpc/react"
 
 import { BlogPostForm } from "../../../components/organisms/list/blog-posts/blog-post.form"
@@ -23,8 +23,6 @@ export default function BlogPostPage({ params }: { params: { blog_post_id: strin
   const { data, error, isLoading } = api.blogPosts.individual.useQuery({
     id: params.blog_post_id,
   })
-
-  
 
   const form = useForm<BlogPost>({
     defaultValues: {
@@ -82,7 +80,11 @@ export default function BlogPostPage({ params }: { params: { blog_post_id: strin
             matchValue={params.blog_post_id}
             onConfirm={archiveBlogPost}
           >
-            <Button variant="destructive" loading={blogPostArchiver.isLoading} rhs={<ArchiveIcon className="h-4 w-4" />}>
+            <Button
+              variant="destructive"
+              loading={blogPostArchiver.isLoading}
+              rhs={<ArchiveIcon className="h-4 w-4" />}
+            >
               <Translated path="blogPosts.blogPost.archive.button" />
             </Button>
           </ConfirmInputDialog>

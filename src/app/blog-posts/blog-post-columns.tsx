@@ -7,7 +7,9 @@ import { Translated } from "@/components/ui/translation/translated"
 import { type BlogPost } from "@/contracts/blog-posts/blog-post"
 import { type Translations } from "@/types/translations"
 
-const translatedColumn = (columnId: string) => <Translated path={`blogPosts.blogPost.${columnId}` as keyof Translations} />
+const translatedColumn = (columnId: string) => (
+  <Translated path={`blogPosts.blogPost.${columnId}` as keyof Translations} />
+)
 
 export type BlogPostColumnsInput = {
   onEdit?: (area: BlogPost) => ReactNode
@@ -25,9 +27,8 @@ export const blogPostColumns: (input?: BlogPostColumnsInput) => ColumnDef<BlogPo
   }
 
   return [
-    
-    { accessorKey: "name", header: () => translatedColumn("name"), },
-    
+    { accessorKey: "name", header: () => translatedColumn("name") },
+
     {
       accessorKey: "createdAt",
       header: () => translatedColumn("createdAt"),

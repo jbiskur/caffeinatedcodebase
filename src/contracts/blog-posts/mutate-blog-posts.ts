@@ -10,7 +10,6 @@ export const updateBlogPostSchema = createBlogPostSchema.partial().extend({
   id: z.string().min(1),
 })
 
-
 export const archiveBlogPostSchema = z.object({
   id: z.string().min(1),
 })

@@ -20,7 +20,7 @@ export const BlogPostColumnEditButton: FC<{
       onDone={(data) => {
         if (!data.success) {
           toast.error(translator("blogPosts.blogPost.update.error"), {
-              closeButton: true,
+            closeButton: true,
           })
           return
         }
@@ -36,9 +36,7 @@ export const BlogPostColumnEditButton: FC<{
             </TooltipTrigger>
             <TooltipContent>
               <p>
-                <Translated
-                  path={"blogPosts.blogPost.update.title"}
-                />
+                <Translated path={"blogPosts.blogPost.update.title"} />
               </p>
             </TooltipContent>
           </Tooltip>

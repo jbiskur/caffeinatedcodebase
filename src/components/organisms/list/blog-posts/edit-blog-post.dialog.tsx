@@ -5,14 +5,22 @@ import { type ReactNode, useState } from "react"
 import { type SubmitHandler, useForm } from "react-hook-form"
 
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Translated } from "@/components/ui/translation/translated"
 import { useTranslation } from "@/components/ui/translation/use-translation"
-import { type UpdateBlogPost, updateBlogPostSchema } from "@/contracts/blog-posts/mutate-blog-posts"
 import { type BlogPost } from "@/contracts/blog-posts/blog-post"
+import { type UpdateBlogPost, updateBlogPostSchema } from "@/contracts/blog-posts/mutate-blog-posts"
 import { type Translations } from "@/types/translations"
 
 export interface EditBlogPostDialogDialogProps {
@@ -31,7 +39,6 @@ export default function EditBlogPostDialog({ children, onDone, blogPost }: EditB
   })
 
   const { translator } = useTranslation()
-
 
   const onSubmit: SubmitHandler<UpdateBlogPost> = async (data) => {
     try {
@@ -71,14 +78,10 @@ export default function EditBlogPostDialog({ children, onDone, blogPost }: EditB
           <form onSubmit={form.handleSubmit(onSubmit)}>
             <DialogHeader>
               <DialogTitle>
-                <Translated
-                  path={"blogPosts.blogPost.update.title"}
-                />
+                <Translated path={"blogPosts.blogPost.update.title"} />
               </DialogTitle>
               <DialogDescription>
-                <Translated
-                  path={"blogPosts.blogPost.update.description"}
-                />
+                <Translated path={"blogPosts.blogPost.update.description"} />
               </DialogDescription>
             </DialogHeader>
             <div className="my-4 space-y-4">

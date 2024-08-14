@@ -1,14 +1,13 @@
 import "@/styles/globals.css"
 
-import { Inter } from "next/font/google"
-import { signOut } from "next-auth/react"
-import { getServerAuthSession } from "@/server/auth"
-import NestedPage from "@/app/nested-page"
-import { PublicPage } from "@/app/public-page"
-import { TranslationProvider } from "@/components/ui/translation/translation-provider"
+import { env } from "@/env"
 import { TRPCReactProvider } from "@/trpc/react"
+import { ClerkProvider } from "@clerk/nextjs"
+import { auth } from "@clerk/nextjs/server"
 import { ThemeProvider } from "next-themes"
+import { Inter } from "next/font/google"
 import { cookies } from "next/headers"
+
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,42 +22,27 @@ export const metadata = {
 }
 
 export default async function RootLayout({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode
 }) {
-	const session = await getServerAuthSession();
+  const { userId, orgId} = await auth()
 
-	if (session?.error) {
-		await signOut({
-			callbackUrl: "/?error=session_expired",
-		});
-	}
+  if (userId && orgId !== env.CLERK_ORGANIZATION_ID) {
+    return <div>You are not authorized to access this page</div>
+  }
 
-	return (
-		<html lang="en" suppressHydrationWarning={true}>
-			<body className={`min-h-screen ${inter.variable} font-inter`}>
-				<ThemeProvider
-					attribute={"class"}
-					defaultTheme={"light"}
-					disableTransitionOnChange
-					enableSystem
-				>
-					<TRPCReactProvider cookies={cookies().toString()}>
-						<TranslationProvider language={"en"}>
-							{!session ? (
-								<>
-									<PublicPage />
-								</>
-							) : (
-								<>
-									<NestedPage session={session}>{children}</NestedPage>
-								</>
-							)}
-						</TranslationProvider>
-					</TRPCReactProvider>
-				</ThemeProvider>
-			</body>
-		</html>
-	);
+  return (
+    <html lang="en" suppressHydrationWarning={true}>
+      <body className={`min-h-screen ${inter.variable} font-inter`}>
+        <ClerkProvider>
+          <ThemeProvider attribute={"class"} defaultTheme={"light"} disableTransitionOnChange enableSystem>
+            <TRPCReactProvider cookies={cookies().toString()}>
+                {children}
+            </TRPCReactProvider>
+          </ThemeProvider>
+        </ClerkProvider>
+      </body>
+    </html>
+  )
 }

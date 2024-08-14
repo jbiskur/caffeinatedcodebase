@@ -3,7 +3,14 @@ import { type PropsWithChildren, useCallback, useState } from "react"
 import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
 import { Translated } from "@/components/ui/translation/translated"
 import { useTranslation } from "@/components/ui/translation/use-translation"
 import { type BlogPost } from "@/contracts/blog-posts/blog-post"
@@ -30,7 +37,6 @@ export function CreateBlogPostDialog({ children, onDone }: PropsWithChildren<Cre
     if (blogPostsCreator.isLoading) {
       return
     }
-
 
     await blogPostsCreator
       .mutateAsync(value)

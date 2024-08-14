@@ -13,21 +13,12 @@ export const env = createEnv({
     FLOWCORE_TENANT: z.string(),
     FLOWCORE_DATACORE: z.string(),
     FLOWCORE_KEY: z.string(),
-    AUTH_KEYCLOAK_ISSUER: z.string(),
-    AUTH_KEYCLOAK_ID: z.string(),
-    AUTH_KEYCLOAK_SECRET: z.string(),
-    NEXTAUTH_SECRET: process.env.NODE_ENV === "production" ? z.string() : z.string().optional(),
-    NEXTAUTH_URL: z.preprocess(
-      // This makes Vercel deployments not fail if you don't set NEXTAUTH_URL
-      // Since NextAuth.js automatically uses the VERCEL_URL if present.
-      (str) => process.env.VERCEL_URL ?? str,
-      // VERCEL_URL doesn't include `https` so it cant be validated as a URL
-      process.env.VERCEL ? z.string() : z.string().url(),
-    ),
+    CLERK_SECRET_KEY: z.string(),
+    CLERK_ORGANIZATION_ID: z.string(),
     TRANSFORMER_SECRET: z.string(),
     NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
-    REDIS_URL: z.string(),
-    REDIS_KEY_PATTERN: z.string(),
+    KV_URL: z.string(),
+    KV_KEY_PATTERN: z.string(),
   },
 
   /**
@@ -35,7 +26,9 @@ export const env = createEnv({
    * isn't built with invalid env vars. To expose them to the client, prefix them with
    * `NEXT_PUBLIC_`.
    */
-  client: {},
+  client: {
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: z.string(),
+  },
 
   /**
    * You can't destruct `process.env` as a regular object in the Next.js edge runtimes (e.g.
@@ -48,16 +41,13 @@ export const env = createEnv({
     FLOWCORE_TENANT: process.env.FLOWCORE_TENANT,
     FLOWCORE_DATACORE: process.env.FLOWCORE_DATACORE,
     FLOWCORE_KEY: process.env.FLOWCORE_KEY,
-    AUTH_KEYCLOAK_ISSUER: process.env.AUTH_KEYCLOAK_ISSUER,
-    AUTH_KEYCLOAK_ID: process.env.AUTH_KEYCLOAK_ID,
-    AUTH_KEYCLOAK_SECRET: process.env.AUTH_KEYCLOAK_SECRET,
-    NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
+    CLERK_SECRET_KEY: process.env.CLERK_SECRET_KEY,
+    CLERK_ORGANIZATION_ID: process.env.CLERK_ORGANIZATION_ID,
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
     TRANSFORMER_SECRET: process.env.TRANSFORMER_SECRET,
     NODE_ENV: process.env.NODE_ENV,
-    // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
-    REDIS_URL: process.env.REDIS_URL,
-    REDIS_KEY_PATTERN: process.env.REDIS_KEY_PATTERN,
+    KV_URL: process.env.KV_URL,
+    KV_KEY_PATTERN: process.env.KV_KEY_PATTERN,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

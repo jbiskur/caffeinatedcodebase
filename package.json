@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^0.9.0",
+    "@clerk/nextjs": "^5.3.1",
     "@ducanh2912/next-pwa": "^10.2.5",
     "@flowcore/sdk-nextjs-backend": "^1.2.0",
     "@flowcore/sdk-transformer-core": "^1.6.0",
@@ -69,7 +70,6 @@
     "lodash": "^4.17.21",
     "lucide-react": "^0.363.0",
     "next": "^14.2.1",
-    "next-auth": "^4.24.7",
     "next-qrcode": "^2.5.1",
     "next-remove-imports": "^1.0.12",
     "next-themes": "^0.3.0",

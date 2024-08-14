@@ -14,11 +14,14 @@ import superjson from "superjson"
 import { ZodError } from "zod"
 
 import { db } from "@/database"
-import { getServerAuthSession } from "@/server/auth"
 
 import { type TrackedMetadata } from "../../lib/events/tracked-webhook"
 
 export type RequestContext = inferAsyncReturnType<typeof createTRPCContext>
+
+import { type getAuth } from "@clerk/nextjs/server"
+
+type AuthObject = ReturnType<typeof getAuth>;
 
 /**
  * 1. CONTEXT
@@ -32,11 +35,10 @@ export type RequestContext = inferAsyncReturnType<typeof createTRPCContext>
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: { req: NextRequest }) => {
-  const session = await getServerAuthSession()
+export const createTRPCContext = async (opts: { headers: Headers, req: NextRequest, auth: AuthObject}) => {
 
   const auditWebhook = metadataWebhookFactory<TrackedMetadata>({
-    userId: session?.user?.id,
+    userId: opts.auth.userId ?? "anonymous",
     remoteIp: getRemoteIp(opts.req),
   })
 
@@ -44,7 +46,7 @@ export const createTRPCContext = async (opts: { req: NextRequest }) => {
     req: opts.req,
     auditWebhook,
     db,
-    session,
+    userId: opts.auth.userId,
   }
 }
 
@@ -119,14 +121,13 @@ export const publicProcedure = t.procedure
  * @see https://trpc.io/docs/procedures
  */
 export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
-  if (!ctx.session || !ctx.session.user) {
-    throw new TRPCError({ code: "UNAUTHORIZED" })
+  if (!ctx.userId) {
+    throw new TRPCError({ code: "UNAUTHORIZED" });
   }
 
   return next({
     ctx: {
-      // infers the `session` as non-nullable
-      session: { ...ctx.session, user: ctx.session.user },
+      userId: ctx.userId,
     },
   })
 })

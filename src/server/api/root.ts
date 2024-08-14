@@ -1,7 +1,6 @@
-import { translationRouter } from "@/server/api/routers/translation/translation.router"
 import { BlogPostsRouter } from "@/server/api/routers/blog-posts/blog-posts.router"
+import { translationRouter } from "@/server/api/routers/translation/translation.router"
 import { createTRPCRouter } from "@/server/api/trpc"
-
 
 /**
  * This is the primary router for your server.

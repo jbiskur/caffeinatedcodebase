@@ -1,7 +1,4 @@
-import {
-  boolean,
-  text,
-} from "drizzle-orm/pg-core"
+import { boolean, text } from "drizzle-orm/pg-core"
 import { createTable } from "./utils"
 
 export const blogPosts = createTable("blogPost", {
