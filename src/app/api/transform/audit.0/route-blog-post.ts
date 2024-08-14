@@ -2,11 +2,11 @@ import { eq } from "drizzle-orm"
 
 import { type AuditLog } from "../../../../contracts/audit/audit-log"
 import {
-  type Blog PostEventArchived,
-  type Blog PostEventCreated,
-  type Blog PostEventUpdated,
+  type BlogPostEventArchived,
+  type BlogPostEventCreated,
+  type BlogPostEventUpdated,
   blogPost,
-} from "../../../../contracts/events/blogPost"
+} from "../../../../contracts/events/blog-post"
 import { EventDataDto, type SourceEvent } from "../../../../contracts/events/source-event"
 import { db } from "../../../../database"
 import { auditLogs } from "../../../../database/schemas"
@@ -26,7 +26,7 @@ export const blogPostRoute = async (
 
   switch (event.eventType) {
     case blogPost.eventType.created:
-      const created = EventDataDto<Blog PostEventCreated>(event)
+      const created = EventDataDto<BlogPostEventCreated>(event)
 
       auditLog = {
         id: created.eventId,
@@ -40,7 +40,7 @@ export const blogPostRoute = async (
       }
       break
     case blogPost.eventType.updated:
-      const updated = EventDataDto<Blog PostEventUpdated>(event)
+      const updated = EventDataDto<BlogPostEventUpdated>(event)
 
       auditLog = {
         id: updated.eventId,
@@ -54,7 +54,7 @@ export const blogPostRoute = async (
       }
       break
     case blogPost.eventType.archived:
-      const archived = EventDataDto<Blog PostEventArchived>(event)
+      const archived = EventDataDto<BlogPostEventArchived>(event)
       auditLog = {
         id: archived.eventId,
         userId: options.userId,

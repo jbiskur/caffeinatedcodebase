@@ -1,17 +1,17 @@
 import type { InferSelectModel } from "drizzle-orm"
 
-import { type Blog Post } from "@/contracts/blogPosts/blogPost"
-import { type Blog PostWithAssociation } from "@/contracts/blogPosts/blogPost-with-association"
+import { type BlogPost } from "@/contracts/blog-posts/blog-post"
+import { type BlogPostWithAssociation } from "@/contracts/blog-posts/blog-post-with-association"
 import { blogPosts } from "@/database/schemas"
 
-export class Blog PostService {
-  private readonly blogPost: Blog PostWithAssociation
+export class BlogPostService {
+  private readonly blogPost: BlogPostWithAssociation
 
   constructor(private readonly row: InferSelectModel<typeof blogPosts>) {
-    this.blogPost = this.rowToBlog Post(row)
+    this.blogPost = this.rowToBlogPost(row)
   }
 
-  getBlog Post(): Blog PostWithAssociation {
+  getBlogPost(): BlogPostWithAssociation {
     return this.blogPost
   }
 
@@ -19,8 +19,7 @@ export class Blog PostService {
     return this.row
   }
 
-  private rowToBlog Post(row: InferSelectModel<typeof blogPosts>): Blog Post {
-    
+  private rowToBlogPost(row: InferSelectModel<typeof blogPosts>): BlogPost {
     return {
       id: row.id,
       name: row.name ?? "",

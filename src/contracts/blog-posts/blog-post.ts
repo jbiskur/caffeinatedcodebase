@@ -1,10 +1,10 @@
 import z from "zod"
 
-export const Blog PostDto = z.object({
+export const BlogPostDto = z.object({
   id: z.string().min(1),
   name: z.string(),
   createdAt: z.string(),
 
 })
 
-export type Blog Post = z.infer<typeof Blog PostDto>
+export type BlogPost = z.infer<typeof BlogPostDto>

@@ -1,17 +1,17 @@
-import { getBlog PostListProcedure } from "@/server/api/routers/blogPosts/blogPost-paginated.procedure"
-import { getBlog PostCountProcedure } from "@/server/api/routers/blogPosts/blogPost-total-count.procedure"
+import { getBlogPostListProcedure } from "@/server/api/routers/blog-posts/blog-post-paginated.procedure"
+import { getBlogPostCountProcedure } from "@/server/api/routers/blog-posts/blog-post-total-count.procedure"
 import { createTRPCRouter } from "@/server/api/trpc"
 
-import { archiveBlog PostProcedure } from "./blogPost-archive.procedure"
-import { createBlog PostProcedure } from "./blogPost-create.procedure"
-import { getBlog PostIndividualProcedure } from "./blogPost-individual.procedure"
-import { updateBlog PostProcedure } from "./blogPost-update.procedure"
+import { archiveBlogPostProcedure } from "./blog-post-archive.procedure"
+import { createBlogPostProcedure } from "./blog-post-create.procedure"
+import { getBlogPostIndividualProcedure } from "./blog-post-individual.procedure"
+import { updateBlogPostProcedure } from "./blog-post-update.procedure"
 
-export const Blog PostsRouter = createTRPCRouter({
-  list: getBlog PostListProcedure,
-  count: getBlog PostCountProcedure,
-  individual: getBlog PostIndividualProcedure,
-  create: createBlog PostProcedure,
-  update: updateBlog PostProcedure,
-  archive: archiveBlog PostProcedure,
+export const BlogPostsRouter = createTRPCRouter({
+  list: getBlogPostListProcedure,
+  count: getBlogPostCountProcedure,
+  individual: getBlogPostIndividualProcedure,
+  create: createBlogPostProcedure,
+  update: updateBlogPostProcedure,
+  archive: archiveBlogPostProcedure,
 })

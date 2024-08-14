@@ -13,36 +13,36 @@ export const blogPost = {
   },
 } as const
 
-export const Blog PostEventCreatedPayload = z.object({
+export const BlogPostEventCreatedPayload = z.object({
   id: z.string(),
   name: z.string(),
   //Fill in the fields that are required to create a new Blog Post
 })
 
-export const Blog PostEventUpdatedPayload = Blog PostEventCreatedPayload.partial().required({
-    id: true,
-  })
+export const BlogPostEventUpdatedPayload = BlogPostEventCreatedPayload.partial().required({
+  id: true,
+})
 
-export const Blog PostEventArchivedPayload = z.object({
+export const BlogPostEventArchivedPayload = z.object({
   id: z.string(),
   _reason: z.string().optional(),
 })
 
-export type Blog PostEventCreated = z.infer<typeof Blog PostEventCreatedPayload>
-export type Blog PostEventUpdated = z.infer<typeof Blog PostEventUpdatedPayload>
-export type Blog PostEventArchived = z.infer<typeof Blog PostEventArchivedPayload>
+export type BlogPostEventCreated = z.infer<typeof BlogPostEventCreatedPayload>
+export type BlogPostEventUpdated = z.infer<typeof BlogPostEventUpdatedPayload>
+export type BlogPostEventArchived = z.infer<typeof BlogPostEventArchivedPayload>
 
-export const sendBlog PostCreatedEvent = webhookClient<z.infer<typeof Blog PostEventCreatedPayload>, TrackedMetadata>(
+export const sendBlogPostCreatedEvent = webhookClient<z.infer<typeof BlogPostEventCreatedPayload>, TrackedMetadata>(
   blogPost.flowType,
   blogPost.eventType.created,
 )
 
-export const sendBlog PostUpdatedEvent = webhookClient<z.infer<typeof Blog PostEventUpdatedPayload>, TrackedMetadata>(
+export const sendBlogPostUpdatedEvent = webhookClient<z.infer<typeof BlogPostEventUpdatedPayload>, TrackedMetadata>(
   blogPost.flowType,
   blogPost.eventType.updated,
 )
 
-export const sendBlog PostArchivedEvent = webhookClient<z.infer<typeof Blog PostEventArchivedPayload>, TrackedMetadata>(
+export const sendBlogPostArchivedEvent = webhookClient<z.infer<typeof BlogPostEventArchivedPayload>, TrackedMetadata>(
   blogPost.flowType,
   blogPost.eventType.archived,
 )

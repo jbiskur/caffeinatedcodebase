@@ -1,19 +1,19 @@
 import { and, eq } from "drizzle-orm"
 import { z } from "zod"
 
-import { type Blog PostWithAssociation } from "@/contracts/blogPosts/blogPost-with-association"
+import { type BlogPostWithAssociation } from "@/contracts/blog-posts/blog-post-with-association"
 import { db } from "@/database"
 import { blogPosts } from "@/database/schemas"
 import { protectedProcedure } from "@/server/api/trpc"
-import { Blog PostService } from "@/server/services/blogPost.service"
+import { BlogPostService } from "@/server/services/blog-post.service"
 
 const inputSchema = z.object({
   id: z.string(),
 })
 
-export const getBlog PostIndividualProcedure = protectedProcedure
+export const getBlogPostIndividualProcedure = protectedProcedure
   .input(inputSchema)
-  .query(async ({ input }): Promise<Blog PostWithAssociation> => {
+  .query(async ({ input }): Promise<BlogPostWithAssociation> => {
     const blogPostResult = await db.query.blogPosts.findFirst({
       where: and(eq(blogPosts.id, input.id), eq(blogPosts.archived, false)),
     })
@@ -22,7 +22,7 @@ export const getBlog PostIndividualProcedure = protectedProcedure
       throw new Error(`No blogPost found with the provided ID: ${input.id}`)
     }
 
-    const blogPost = new Blog PostService(blogPostResult)
+    const blogPost = new BlogPostService(blogPostResult)
 
-    return blogPost.getBlog Post()
+    return blogPost.getBlogPost()
   })

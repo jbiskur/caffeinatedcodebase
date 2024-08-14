@@ -1,9 +1,9 @@
 import { z } from "zod"
 
-import { Blog PostDto } from "@/contracts/blogPosts/blogPost"
+import { BlogPostDto } from "@/contracts/blog-posts/blog-post"
 
-export const Blog PostWithAssociationDto = Blog PostDto.extend({
+export const BlogPostWithAssociationDto = BlogPostDto.extend({
   association: z.object({}).nullish(),
 })
 
-export type Blog PostWithAssociation = z.infer<typeof Blog PostWithAssociationDto>
+export type BlogPostWithAssociation = z.infer<typeof BlogPostWithAssociationDto>

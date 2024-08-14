@@ -4,7 +4,7 @@ import { db } from "@/database"
 import { blogPosts } from "@/database/schemas"
 import { protectedProcedure } from "@/server/api/trpc"
 
-export const getBlog PostCountProcedure = protectedProcedure.query(async (): Promise<number> => {
+export const getBlogPostCountProcedure = protectedProcedure.query(async (): Promise<number> => {
   return db
     .select({ value: count() })
     .from(blogPosts)

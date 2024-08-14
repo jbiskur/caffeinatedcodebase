@@ -1,7 +1,9 @@
-import { createBlog PostSchema } from "@/contracts/blogPosts/mutate-blogPosts"
+import { createBlogPostSchema } from "@/contracts/blog-posts/mutate-blog-posts"
 import { protectedProcedure } from "@/server/api/trpc"
-import { sendCreateBlog PostFlow } from "@/server/services/flows/create-blogPost-flow"
+import { sendCreateBlogPostFlow } from "@/server/services/flows/create-blog-post-flow"
 
-export const createBlog PostProcedure = protectedProcedure.input(createBlog PostSchema).mutation(async ({ input, ctx }) => {
-  return sendCreateBlog PostFlow(ctx, input)
-})
+export const createBlogPostProcedure = protectedProcedure
+  .input(createBlogPostSchema)
+  .mutation(async ({ input, ctx }) => {
+    return sendCreateBlogPostFlow(ctx, input)
+  })

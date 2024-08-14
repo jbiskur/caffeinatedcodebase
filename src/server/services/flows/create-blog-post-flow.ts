@@ -1,15 +1,15 @@
 import shortUUID from "short-uuid"
 
-import { sendBlog PostArchivedEvent, sendBlog PostCreatedEvent } from "@/contracts/events/blogPost"
-import { type CreateBlog Post } from "@/contracts/blogPosts/mutate-blogPosts"
+import { sendBlogPostArchivedEvent, sendBlogPostCreatedEvent } from "@/contracts/events/blog-post"
+import { type CreateBlogPost } from "@/contracts/blog-posts/mutate-blog-posts"
 import { readError } from "@/lib/read-error"
 import { type RequestContext } from "@/server/api/trpc"
 
-export const sendCreateBlog PostFlow = async (ctx: RequestContext, input: CreateBlog Post) => {
+export const sendCreateBlogPostFlow = async (ctx: RequestContext, input: CreateBlogPost) => {
   const id = shortUUID.generate()
   
   try {
-    await ctx.auditWebhook(sendBlog PostCreatedEvent, {
+    await ctx.auditWebhook(sendBlogPostCreatedEvent, {
       id,
       name: input.name ?? "",
     })
@@ -18,7 +18,7 @@ export const sendCreateBlog PostFlow = async (ctx: RequestContext, input: Create
 
     const message = readError(error)
 
-    await sendBlog PostArchivedEvent({
+    await sendBlogPostArchivedEvent({
       id,
       _reason: `rollback: ${message}`,
     })

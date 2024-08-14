@@ -3,21 +3,21 @@ import { and, asc, desc, eq, ilike, type SQL } from "drizzle-orm"
 import { SearchableScrollPaginationInput } from "@/contracts/pagination/scroll"
 import { db } from "@/database"
 import { protectedProcedure } from "@/server/api/trpc"
-import { type Blog Post } from "@/contracts/blogPosts/blogPost"
-import { type ScrollBlog PostResult } from "@/contracts/blogPosts/scroll-blogPosts"
+import { type BlogPost } from "@/contracts/blog-posts/blog-post"
+import { type ScrollBlogPostResult } from "@/contracts/blog-posts/scroll-blog-posts"
 import { blogPosts } from "@/database/schemas"
-import { Blog PostService } from "@/server/services/blogPost.service"
+import { BlogPostService } from "@/server/services/blog-post.service"
 
-export const getBlog PostListProcedure = protectedProcedure
+export const getBlogPostListProcedure = protectedProcedure
   .input(SearchableScrollPaginationInput)
-  .query(async ({ input }): Promise<ScrollBlog PostResult> => {
+  .query(async ({ input }): Promise<ScrollBlogPostResult> => {
     const limit = input.limit ?? 50
     const { cursor } = input
 
     let orderBy: SQL<unknown>[] = [asc(blogPosts.id)]
 
     if (input.sort?.[0]) {
-      const sorting = input.sort[0] as { id: keyof Blog Post; desc: boolean }
+      const sorting = input.sort[0] as { id: keyof BlogPost; desc: boolean }
 
       switch (sorting.id) {
         case "createdAt":
@@ -57,9 +57,9 @@ export const getBlog PostListProcedure = protectedProcedure
       nextCursor = cursor + limit
     }
     return {
-      items: profileResult.map((row): Blog Post => {
-        const blogPostService = new Blog PostService(row)
-        return blogPostService.getBlog Post()
+      items: profileResult.map((row): BlogPost => {
+        const blogPostService = new BlogPostService(row)
+        return blogPostService.getBlogPost()
       }),
       nextCursor,
     }

@@ -1,10 +1,10 @@
 import z from "zod"
 
 import { PaginationResult } from "@/contracts/pagination/pagination"
-import { Blog PostDto } from "@/contracts/blogPosts/blogPost"
+import { BlogPostDto } from "@/contracts/blog-posts/blog-post"
 
-export const PagedBlog PostDto = PaginationResult.extend({
-  items: z.array(Blog PostDto),
+export const PagedBlogPostDto = PaginationResult.extend({
+  items: z.array(BlogPostDto),
 })
 
-export type PagedBlog PostResult = z.infer<typeof PagedBlog PostDto>
+export type PagedBlogPostResult = z.infer<typeof PagedBlogPostDto>

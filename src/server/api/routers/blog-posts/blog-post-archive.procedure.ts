@@ -1,9 +1,11 @@
-import { sendBlog PostArchivedEvent } from "@/contracts/events/blogPost"
-import { archiveBlog PostSchema } from "@/contracts/blogPosts/mutate-blogPosts"
+import { sendBlogPostArchivedEvent } from "@/contracts/events/blog-post"
+import { archiveBlogPostSchema } from "@/contracts/blog-posts/mutate-blog-posts"
 import { protectedProcedure } from "@/server/api/trpc"
 
-export const archiveBlog PostProcedure = protectedProcedure.input(archiveBlog PostSchema).mutation(async ({ input, ctx }) => {
-  await ctx.auditWebhook(sendBlog PostArchivedEvent, {
-    id: input.id,
+export const archiveBlogPostProcedure = protectedProcedure
+  .input(archiveBlogPostSchema)
+  .mutation(async ({ input, ctx }) => {
+    await ctx.auditWebhook(sendBlogPostArchivedEvent, {
+      id: input.id,
   })
 })

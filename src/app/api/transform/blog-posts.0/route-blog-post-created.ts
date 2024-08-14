@@ -1,13 +1,13 @@
 import { eq } from "drizzle-orm"
 
-import { Blog PostEventCreatedPayload } from "@/contracts/events/blogPost"
+import { BlogPostEventCreatedPayload } from "@/contracts/events/blog-post"
 import { db } from "@/database"
 import { blogPosts } from "@/database/schemas"
 import { type EventMetdata } from "@flowcore/sdk-transformer-core"
 
 export default async function blogPostCreated(payload: unknown, metadata?: EventMetdata) {
   console.log("Got created event", payload)
-  const parsedPayload = Blog PostEventCreatedPayload.parse(payload)
+  const parsedPayload = BlogPostEventCreatedPayload.parse(payload)
   const exists = await db.query.blogPosts.findFirst({
     where: eq(blogPosts.id, parsedPayload.id),
   })

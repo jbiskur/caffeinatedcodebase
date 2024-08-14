@@ -1,11 +1,11 @@
 import z from "zod"
 
-import { Blog PostDto } from "@/contracts/blogPosts/blogPost"
+import { BlogPostDto } from "@/contracts/blog-posts/blog-post"
 
 import { ScrollPaginationResult } from "../pagination/scroll"
 
-export const ScrollBlog PostDto = ScrollPaginationResult.extend({
-  items: z.array(Blog PostDto),
+export const ScrollBlogPostDto = ScrollPaginationResult.extend({
+  items: z.array(BlogPostDto),
 })
 
-export type ScrollBlog PostResult = z.infer<typeof ScrollBlog PostDto>
+export type ScrollBlogPostResult = z.infer<typeof ScrollBlogPostDto>
