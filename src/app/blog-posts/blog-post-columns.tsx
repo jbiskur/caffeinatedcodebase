@@ -4,18 +4,18 @@ import { type ColumnDef } from "@tanstack/react-table"
 import { type ReactNode } from "react"
 
 import { Translated } from "@/components/ui/translation/translated"
-import { type Blog Post } from "@/contracts/blogPosts/blogPost"
+import { type BlogPost } from "@/contracts/blog-posts/blog-post"
 import { type Translations } from "@/types/translations"
 
 const translatedColumn = (columnId: string) => <Translated path={`blogPosts.blogPost.${columnId}` as keyof Translations} />
 
-export type Blog PostColumnsInput = {
-  onEdit?: (area: Blog Post) => ReactNode
-  onArchive?: (area: Blog Post) => ReactNode
+export type BlogPostColumnsInput = {
+  onEdit?: (area: BlogPost) => ReactNode
+  onArchive?: (area: BlogPost) => ReactNode
 }
 
-export const blogPostColumns: (input?: Blog PostColumnsInput) => ColumnDef<Blog Post>[] = (input) => {
-  const cell = ({ row }: { row: { original: Blog Post } }) => {
+export const blogPostColumns: (input?: BlogPostColumnsInput) => ColumnDef<BlogPost>[] = (input) => {
+  const cell = ({ row }: { row: { original: BlogPost } }) => {
     return (
       <div style={{ textAlign: "right" }}>
         {input?.onEdit?.(row.original)}

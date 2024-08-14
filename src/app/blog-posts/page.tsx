@@ -3,10 +3,10 @@
 import { useSearchParams } from "next/navigation"
 import { useMemo } from "react"
 
-import { Blog PostsList } from "@/components/organisms/list/blogPosts/blogPosts-list"
+import { BlogPostsList } from "@/components/organisms/list/blog-posts/blog-posts-list"
 import { Translated } from "@/components/ui/translation/translated"
 
-export default function Blog PostsPage() {
+export default function BlogPostsPage() {
   const search = useSearchParams()
 
   const page = useMemo(() => parseInt(search.get("page") ?? "1"), [search])
@@ -18,7 +18,7 @@ export default function Blog PostsPage() {
           <Translated path="blogPosts.title" />
         </h1>
       </div>
-      <Blog PostsList currentPage={page} canCreate={true} />
+      <BlogPostsList currentPage={page} canCreate={true} />
     </div>
   )
 }

@@ -3,24 +3,20 @@ import { type FC } from "react"
 
 import { Button } from "../../../components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../../../components/ui/card"
-import { SocialSecurityNumber } from "../../../components/ui/social-security-number"
 import { Translated } from "../../../components/ui/translation/translated"
-import { type Blog Post } from "../../../contracts/blogPosts/blogPost"
+import { type BlogPost } from "../../../contracts/blog-posts/blog-post"
 
-export const Blog PostCard: FC<{
-  blogPost: Blog Post
+export const BlogPostCard: FC<{
+  blogPost: BlogPost
 }> = ({ blogPost }) => {
   const router = useRouter()
   return (
     <Card>
       <CardHeader>
-        <CardTitle>{blogPost.firstName + " " + blogPost.lastName}</CardTitle>
+        <CardTitle>{blogPost.name}</CardTitle>
       </CardHeader>
       <CardContent>
-        <p>
-          <SocialSecurityNumber socialSecurityNumber={blogPost.socialSecurity} />
-        </p>
-        <p>{blogPost.city}</p>
+        <p>{blogPost.createdAt}</p>
       </CardContent>
       <CardFooter>
         <Button onClick={() => void router.push(`/blogPosts/${blogPost?.id}`)}>

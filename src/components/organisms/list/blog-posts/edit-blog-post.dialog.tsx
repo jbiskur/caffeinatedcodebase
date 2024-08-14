@@ -11,20 +11,20 @@ import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Translated } from "@/components/ui/translation/translated"
 import { useTranslation } from "@/components/ui/translation/use-translation"
-import { type UpdateBlog Post, updateBlog PostSchema } from "@/contracts/blogPosts/mutate-blogPosts"
-import { type Blog Post } from "@/contracts/blogPosts/blogPost"
+import { type UpdateBlogPost, updateBlogPostSchema } from "@/contracts/blog-posts/mutate-blog-posts"
+import { type BlogPost } from "@/contracts/blog-posts/blog-post"
 import { type Translations } from "@/types/translations"
 
-export interface EditBlog PostDialogDialogProps {
+export interface EditBlogPostDialogDialogProps {
   children: ReactNode
-  blogPost: Blog Post
+  blogPost: BlogPost
   onDone: <TData = unknown>(input: { data?: TData; success: boolean }) => void
 }
 
-export default function EditBlog PostDialog({ children, onDone, blogPost }: EditBlog PostDialogDialogProps) {
+export default function EditBlogPostDialog({ children, onDone, blogPost }: EditBlogPostDialogDialogProps) {
   const [opened, setOpened] = useState(false)
-  const form = useForm<Blog Post>({
-    resolver: zodResolver(updateBlog PostSchema),
+  const form = useForm<BlogPost>({
+    resolver: zodResolver(updateBlogPostSchema),
     defaultValues: {
       id: blogPost.id,
     },
@@ -33,7 +33,7 @@ export default function EditBlog PostDialog({ children, onDone, blogPost }: Edit
   const { translator } = useTranslation()
 
 
-  const onSubmit: SubmitHandler<UpdateBlog Post> = async (data) => {
+  const onSubmit: SubmitHandler<UpdateBlogPost> = async (data) => {
     try {
       onDone({
         ...data,
@@ -50,7 +50,7 @@ export default function EditBlog PostDialog({ children, onDone, blogPost }: Edit
   }
 
   const shownFields: {
-    name: keyof Blog Post
+    name: keyof BlogPost
     label: keyof Translations
     description: keyof Translations
     placeholder: keyof Translations

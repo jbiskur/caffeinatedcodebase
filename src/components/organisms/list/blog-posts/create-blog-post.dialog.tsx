@@ -6,17 +6,17 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { Translated } from "@/components/ui/translation/translated"
 import { useTranslation } from "@/components/ui/translation/use-translation"
-import { type Blog Post } from "@/contracts/blogPosts/blogPost"
-import { createBlog PostSchema } from "@/contracts/blogPosts/mutate-blogPosts"
+import { type BlogPost } from "@/contracts/blog-posts/blog-post"
+import { createBlogPostSchema } from "@/contracts/blog-posts/mutate-blog-posts"
 import { api } from "@/trpc/react"
 
-import { Blog PostForm } from "./blogPost.form"
+import { BlogPostForm } from "./blog-post.form"
 
-export type CreateBlog PostDialogProps = {
-  onDone: (result: Blog Post) => void
+export type CreateBlogPostDialogProps = {
+  onDone: (result: BlogPost) => void
 }
 
-export function CreateBlog PostDialog({ children, onDone }: PropsWithChildren<CreateBlog PostDialogProps>) {
+export function CreateBlogPostDialog({ children, onDone }: PropsWithChildren<CreateBlogPostDialogProps>) {
   const [opened, setOpened] = useState(false)
   const { translator } = useTranslation()
 
@@ -26,7 +26,7 @@ export function CreateBlog PostDialog({ children, onDone }: PropsWithChildren<Cr
     setOpened(false)
   }, [])
 
-  const onCreate = async (value: Blog Post) => {
+  const onCreate = async (value: BlogPost) => {
     if (blogPostsCreator.isLoading) {
       return
     }
@@ -58,7 +58,7 @@ export function CreateBlog PostDialog({ children, onDone }: PropsWithChildren<Cr
           </DialogDescription>
         </DialogHeader>
         <div>
-          <Blog PostForm onSubmit={onCreate} className="max-h-96" resolver={zodResolver(createBlog PostSchema)}>
+          <BlogPostForm onSubmit={onCreate} className="max-h-96" resolver={zodResolver(createBlogPostSchema)}>
             <>
               <Button onClick={cancel} variant={"secondary"}>
                 <Translated path={"button.cancel"} />
@@ -67,7 +67,7 @@ export function CreateBlog PostDialog({ children, onDone }: PropsWithChildren<Cr
                 <Translated path={"button.create"} />
               </Button>
             </>
-          </Blog PostForm>
+          </BlogPostForm>
         </div>
       </DialogContent>
     </Dialog>

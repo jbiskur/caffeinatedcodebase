@@ -10,13 +10,13 @@ import ConfirmInputDialog from "@/components/molecules/dialogs/confirm-input.dia
 import { Button } from "@/components/ui/button"
 import { Translated } from "@/components/ui/translation/translated"
 import { useTranslation } from "@/components/ui/translation/use-translation"
-import { updateBlog PostSchema } from "@/contracts/blogPosts/mutate-blogPosts"
-import { type Blog Post } from "@/contracts/blogPosts/blogPost"
+import { updateBlogPostSchema } from "@/contracts/blog-posts/mutate-blog-posts"
+import { type BlogPost } from "@/contracts/blog-posts/blog-post"
 import { api } from "@/trpc/react"
 
-import { Blog PostForm } from "../../../components/organisms/list/blogPosts/blogPost.form"
+import { BlogPostForm } from "../../../components/organisms/list/blog-posts/blog-post.form"
 
-export default function Blog PostPage({ params }: { params: { blog_post_id: string } }) {
+export default function BlogPostPage({ params }: { params: { blog_post_id: string } }) {
   const { translator } = useTranslation()
   const router = useRouter()
 
@@ -26,7 +26,7 @@ export default function Blog PostPage({ params }: { params: { blog_post_id: stri
 
   
 
-  const form = useForm<Blog Post>({
+  const form = useForm<BlogPost>({
     defaultValues: {
       id: params.blog_post_id,
     },
@@ -57,11 +57,11 @@ export default function Blog PostPage({ params }: { params: { blog_post_id: stri
     }
   }, [data, form])
 
-  const updateBlog Post = (values: Blog Post) => {
+  const updateBlogPost = (values: BlogPost) => {
     blogPostUpdater.mutate(values)
   }
-  const archiveBlog Post = async () => {
-    await blogPostArchiver.mutateAsync({ id: params.blogPost_id })
+  const archiveBlogPost = async () => {
+    await blogPostArchiver.mutateAsync({ id: params.blog_post_id })
   }
 
   if (isLoading) {
@@ -74,13 +74,13 @@ export default function Blog PostPage({ params }: { params: { blog_post_id: stri
 
   return (
     <>
-      <Blog PostForm value={data} onSubmit={updateBlog Post} resolver={zodResolver(updateBlog PostSchema)}>
+      <BlogPostForm value={data} onSubmit={updateBlogPost} resolver={zodResolver(updateBlogPostSchema)}>
         <>
           <ConfirmInputDialog
             title={translator("blogPosts.blogPost.archive.title")}
             description={translator("blogPosts.blogPost.archive.confirmation", { name: params.blog_post_id })}
             matchValue={params.blog_post_id}
-            onConfirm={archiveBlog Post}
+            onConfirm={archiveBlogPost}
           >
             <Button variant="destructive" loading={blogPostArchiver.isLoading} rhs={<ArchiveIcon className="h-4 w-4" />}>
               <Translated path="blogPosts.blogPost.archive.button" />
@@ -90,7 +90,7 @@ export default function Blog PostPage({ params }: { params: { blog_post_id: stri
             <Translated path="blogPosts.blogPost.update.button" />
           </Button>
         </>
-      </Blog PostForm>
+      </BlogPostForm>
     </>
   )
 }

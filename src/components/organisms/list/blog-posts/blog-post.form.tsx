@@ -6,20 +6,20 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input"
 import { Translated } from "@/components/ui/translation/translated"
 import { useTranslation } from "@/components/ui/translation/use-translation"
-import { type Blog Post } from "@/contracts/blogPosts/blogPost"
+import { type BlogPost } from "@/contracts/blog-posts/blog-post"
 import { cn } from "@/lib/utils"
 
-export type Blog PostFormProps = {
-  value ?: Blog Post
-    onSubmit: (value: Blog Post) => void
+export type BlogPostFormProps = {
+  value ?: BlogPost
+    onSubmit: (value: BlogPost) => void
       className ?: string
-  resolver: Resolver <Blog Post>
+  resolver: Resolver <BlogPost>
 }
 
-export function Blog PostForm(props: PropsWithChildren <Blog PostFormProps >) {
+export function BlogPostForm(props: PropsWithChildren <BlogPostFormProps >) {
   const { translator } = useTranslation()
 
-  const form = useForm <Blog Post> ({
+  const form = useForm <BlogPost> ({
     resolver: props.resolver,
     defaultValues: {
       id: props.value?.id,

@@ -3,22 +3,22 @@ import { PlusIcon } from "lucide-react"
 import Link from "next/link"
 import { type FC, useState } from "react"
 
-import { blogPostColumns } from "@/app/blogPosts/blogPost-columns"
+import { blogPostColumns } from "@/app/blog-posts/blog-post-columns"
 import { Button } from "@/components/ui/button"
 import { DataTable } from "@/components/ui/data/data-table"
 import { Translated } from "@/components/ui/translation/translated"
-import { type Blog Post } from "@/contracts/blogPosts/blogPost"
+import { type BlogPost } from "@/contracts/blog-posts/blog-post"
 import { api } from "@/trpc/react"
 
 import { type ListControlProps } from "../list-control.type"
-import { CreateBlog PostDialog } from "./create-blogPost.dialog"
-import { Blog PostColumnEditButton } from "./blogPost-column-edit.button"
+import { CreateBlogPostDialog } from "./create-blog-post.dialog"
+import { BlogPostColumnEditButton } from "./blog-post-column-edit.button"
 
-export type Blog PostsListProps = {
+export type BlogPostsListProps = {
   currentPage: number
-} & ListControlProps<Blog Post>
+} & ListControlProps<BlogPost>
 
-export const Blog PostsList: FC<Blog PostsListProps> = ({ asRoute, onSelect, canCreate }) => {
+export const BlogPostsList: FC<BlogPostsListProps> = ({ asRoute, onSelect, canCreate }) => {
   const [value, setValue] = useState("")
   const [sort, setSort] = useState<SortingState>([])
 
@@ -35,7 +35,7 @@ export const Blog PostsList: FC<Blog PostsListProps> = ({ asRoute, onSelect, can
     <div>
       {canCreate && (
         <div className="flex w-[100%] justify-end">
-          <CreateBlog PostDialog
+          <CreateBlogPostDialog
             onDone={() => {
               void refetch()
             }}
@@ -43,13 +43,13 @@ export const Blog PostsList: FC<Blog PostsListProps> = ({ asRoute, onSelect, can
             <Button rhs={<PlusIcon />}>
               <Translated path="blogPosts.blogPost.create.button" />
             </Button>
-          </CreateBlog PostDialog>
+          </CreateBlogPostDialog>
         </div>
       )}
 
       <DataTable
         columns={blogPostColumns({
-          onEdit: (blogPost: Blog Post) => <Blog PostColumnEditButton blogPost={blogPost} refetch={refetch} />,
+          onEdit: (blogPost: BlogPost) => <BlogPostColumnEditButton blogPost={blogPost} refetch={refetch} />,
         })}
         data={blogPosts}
         isLoading={isLoading}

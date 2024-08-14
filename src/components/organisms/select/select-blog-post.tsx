@@ -1,14 +1,14 @@
 import { PlusCircleIcon } from "lucide-react"
 import { useCallback, useEffect, useMemo, useState } from "react"
 
-import { CreateBlog PostDialog } from "@/components/organisms/list/blogPosts/create-blogPost.dialog"
+import { CreateBlogPostDialog } from "@/components/organisms/list/blog-posts/create-blog-post.dialog"
 import { Button } from "@/components/ui/button"
 import { ComboBox, type ComboBoxOption } from "@/components/ui/combo-box"
 import { Translated } from "@/components/ui/translation/translated"
-import { type Blog Post } from "@/contracts/blogPosts/blogPost"
+import { type BlogPost } from "@/contracts/blog-posts/blog-post"
 import { api } from "@/trpc/react"
 
-type SelectBlog PostProps = {
+type SelectBlogPostProps = {
   value?: string
   onChange: (value?: string) => void
   placeholder?: string
@@ -16,7 +16,7 @@ type SelectBlog PostProps = {
   className?: string
 } & ComboBoxOption
 
-export default function SelectBlog Post({ value, placeholder, onChange, clearable, className }: SelectBlog PostProps) {
+export default function SelectBlogPost({ value, placeholder, onChange, clearable, className }: SelectBlogPostProps) {
   const [query, setQuery] = useState<string>("")
   const [options, setOptions] = useState<ComboBoxOption[]>([])
 
@@ -49,7 +49,7 @@ export default function SelectBlog Post({ value, placeholder, onChange, clearabl
   )
 
   const added = useCallback(
-    (result: Blog Post) => {
+    (result: BlogPost) => {
       onChange(result.id)
       void refetch()
     },
@@ -67,11 +67,11 @@ export default function SelectBlog Post({ value, placeholder, onChange, clearabl
       onChange={select}
       onQueryChange={setQuery}
     >
-      <CreateBlog PostDialog onDone={added}>
+      <CreateBlogPostDialog onDone={added}>
         <Button variant="ghost" rhs={<PlusCircleIcon className="h-4 w-4" />}>
           <Translated path="blogPosts.blogPost.create.title" />
         </Button>
-      </CreateBlog PostDialog>
+      </CreateBlogPostDialog>
     </ComboBox>
   )
 }
