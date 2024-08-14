@@ -19,7 +19,7 @@ export const BlogPostCard: FC<{
         <p>{blogPost.createdAt}</p>
       </CardContent>
       <CardFooter>
-        <Button onClick={() => void router.push(`/blogPosts/${blogPost?.id}`)}>
+        <Button onClick={() => void router.push(`/blog-posts/${blogPost?.id}`)}>
           <Translated path={"button.view"} />
         </Button>
       </CardFooter>

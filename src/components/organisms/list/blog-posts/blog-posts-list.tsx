@@ -11,8 +11,8 @@ import { type BlogPost } from "@/contracts/blog-posts/blog-post"
 import { api } from "@/trpc/react"
 
 import { type ListControlProps } from "../list-control.type"
-import { CreateBlogPostDialog } from "./create-blog-post.dialog"
 import { BlogPostColumnEditButton } from "./blog-post-column-edit.button"
+import { CreateBlogPostDialog } from "./create-blog-post.dialog"
 
 export type BlogPostsListProps = {
   currentPage: number
@@ -58,7 +58,7 @@ export const BlogPostsList: FC<BlogPostsListProps> = ({ asRoute, onSelect, canCr
         onSortChange={setSort}
         cellNode={(row, cell) =>
           asRoute ? (
-            <Link href="/" as={`/blogPosts/${row.original.id}`} passHref>
+            <Link href="/" as={`/blog-posts/${row.original.id}`} passHref>
               {flexRender(cell.column.columnDef.cell, cell.getContext())}
             </Link>
           ) : (
