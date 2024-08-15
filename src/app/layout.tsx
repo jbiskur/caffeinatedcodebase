@@ -52,7 +52,7 @@ export default async function RootLayout({
         <ClerkProvider>
           <ThemeProvider attribute={"class"} defaultTheme={"light"} disableTransitionOnChange enableSystem>
             <TRPCReactProvider cookies={cookies().toString()}>
-              <div>
+              <div className="flex flex-col min-h-screen">
                 <header className="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
                   <Link href="#" className="flex items-center gap-2 text-lg font-semibold md:text-base" prefetch={false}>
                     <MountainIcon className="w-6 h-6" />
@@ -73,10 +73,10 @@ export default async function RootLayout({
                     </SignedIn>
                   </nav>
                 </header>
-                <main>
+                <main className="flex-grow">
                 {children}
                 </main>
-                <footer className="bg-muted py-6 px-4 md:px-6">
+                <footer className="bg-muted py-6 px-4 md:px-6 shrink-0">
                   <div className="container mx-auto flex flex-col items-center justify-between gap-4 md:flex-row">
                     <p className="text-sm text-muted-foreground">&copy; 2024 Acme Inc. All rights reserved.</p>
                     <nav className="flex items-center gap-4 text-sm">
