@@ -35,7 +35,7 @@ type AuthObject = ReturnType<typeof getAuth>;
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: { headers: Headers, req: NextRequest, auth: AuthObject}) => {
+export const createTRPCContext = async (opts: { req?: NextRequest, auth: AuthObject}) => {
 
   const auditWebhook = metadataWebhookFactory<TrackedMetadata>({
     userId: opts.auth.userId ?? "anonymous",
@@ -50,8 +50,8 @@ export const createTRPCContext = async (opts: { headers: Headers, req: NextReque
   }
 }
 
-const getRemoteIp = (req: NextRequest) => {
-  if (req.headers.get("x-forwarded-for")) {
+const getRemoteIp = (req?: NextRequest) => {
+  if (req?.headers.get("x-forwarded-for")) {
     if (req.headers.get("x-forwarded-for") === "::1") {
       return "127.0.0.1"
     }
