@@ -22,8 +22,8 @@ export default function NewBlogPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center">
-        {/* <Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown> */}
-        <MDEditorComponent markdown={markdown} />
+      {/* <Markdown remarkPlugins={[remarkGfm]}>{markdown}</Markdown> */}
+      <MDEditorComponent markdown={markdown} />
     </div>
   )
 }

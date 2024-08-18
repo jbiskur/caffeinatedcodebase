@@ -2,7 +2,8 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { SignedIn } from "@clerk/nextjs"
-import { FilePlusIcon, SearchIcon } from "lucide-react"
+import { faFilePlus, faSearch } from "@fortawesome/pro-light-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Link from "next/link"
 
 export default function Home() {
@@ -95,7 +96,7 @@ export default function Home() {
             <CardContent className="flex items-center">
               <Link href="/blog/new">
                 <Button className="ml-2">
-                  <FilePlusIcon className="w-5 h-5" />
+                  <FontAwesomeIcon icon={faFilePlus} className="w-5 h-5" />
                   <span className="sr-only">New Blog Post</span>
                 </Button>
               </Link>
@@ -110,7 +111,7 @@ export default function Home() {
           <CardContent className="flex items-center">
             <Input placeholder="Search" className="flex-1" />
             <Button className="ml-2">
-              <SearchIcon className="w-5 h-5" />
+              <FontAwesomeIcon icon={faSearch} className="w-5 h-5" />
               <span className="sr-only">Search</span>
             </Button>
           </CardContent>

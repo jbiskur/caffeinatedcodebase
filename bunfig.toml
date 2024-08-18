@@ -1,0 +1,2 @@
+[install]
+registry = { url = "https://npm.fontawesome.com/", token = $FONT_AWESOME_TOKEN }

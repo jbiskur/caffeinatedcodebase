@@ -7,6 +7,10 @@ import { Inter } from "next/font/google"
 import { cookies } from "next/headers"
 import Link from "next/link"
 
+import { config } from "@fortawesome/fontawesome-svg-core"
+import "@fortawesome/fontawesome-svg-core/styles.css"
+config.autoAddCss = false
+
 const fontHeading = Inter({
   subsets: ["latin"],
   display: "swap",
