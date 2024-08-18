@@ -21,7 +21,7 @@ export type RequestContext = inferAsyncReturnType<typeof createTRPCContext>
 
 import { type getAuth } from "@clerk/nextjs/server"
 
-type AuthObject = ReturnType<typeof getAuth>;
+type AuthObject = ReturnType<typeof getAuth>
 
 /**
  * 1. CONTEXT
@@ -35,8 +35,7 @@ type AuthObject = ReturnType<typeof getAuth>;
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: { req?: NextRequest, auth: AuthObject}) => {
-
+export const createTRPCContext = async (opts: { req?: NextRequest; auth: AuthObject }) => {
   const auditWebhook = metadataWebhookFactory<TrackedMetadata>({
     userId: opts.auth.userId ?? "anonymous",
     remoteIp: getRemoteIp(opts.req),
@@ -122,7 +121,7 @@ export const publicProcedure = t.procedure
  */
 export const protectedProcedure = t.procedure.use(({ ctx, next }) => {
   if (!ctx.userId) {
-    throw new TRPCError({ code: "UNAUTHORIZED" });
+    throw new TRPCError({ code: "UNAUTHORIZED" })
   }
 
   return next({

@@ -3,17 +3,16 @@ import "@/styles/globals.css"
 import { cn } from "@/lib/utils"
 import { Inter } from "next/font/google"
 
-
 const fontHeading = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-heading',
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-heading",
 })
 
 const fontBody = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-body',
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-body",
 })
 
 export const metadata = {
@@ -28,18 +27,9 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body 
-        className={cn(
-          'antialiased',
-          fontHeading.variable,
-          fontBody.variable
-        )}
-      >
-              {children}
-      </body>
+      <body className={cn("antialiased", fontHeading.variable, fontBody.variable)}>{children}</body>
     </html>
   )
 }

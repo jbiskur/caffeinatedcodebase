@@ -1,6 +1,7 @@
 /** @type {import("next").NextConfig} */
 
 import * as withPWAInit from "@ducanh2912/next-pwa";
+import removeImports from "next-remove-imports"
 //
 const withPWA = withPWAInit.default({
     dest: "public",
@@ -34,5 +35,4 @@ const nextConfig = {
   }
 };
 
-export default withPWA(nextConfig);
-
+export default withPWA(removeImports(nextConfig));

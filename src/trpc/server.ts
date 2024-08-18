@@ -10,9 +10,7 @@ import { type AppRouter, appRouter } from "@/server/api/root"
 import { createTRPCContext } from "@/server/api/trpc"
 
 import { auth } from "@clerk/nextjs/server"
-import { cookies } from "next/headers"
 import { transformer } from "./shared"
-
 
 /**
  * This wraps the `createTRPCContext` helper and provides the required context for the tRPC API when
@@ -21,8 +19,8 @@ import { transformer } from "./shared"
 const createContext = cache(() => {
   return createTRPCContext({
     auth: auth(),
-  });
-});
+  })
+})
 
 export const api = createTRPCProxyClient<AppRouter>({
   transformer,

@@ -1,25 +1,22 @@
-import "@/styles/globals.css"
-
-import { env } from "@/env"
 import { cn } from "@/lib/utils"
+import "@/styles/globals.css"
 import { TRPCReactProvider } from "@/trpc/react"
 import { ClerkProvider, SignedIn, UserButton } from "@clerk/nextjs"
-import { auth } from "@clerk/nextjs/server"
 import { ThemeProvider } from "next-themes"
 import { Inter } from "next/font/google"
 import { cookies } from "next/headers"
 import Link from "next/link"
 
 const fontHeading = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-heading',
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-heading",
 })
 
 const fontBody = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-body',
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-body",
 })
 
 export const metadata = {
@@ -42,40 +39,33 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning={true}>
-      <body 
-        className={cn(
-          'antialiased',
-          fontHeading.variable,
-          fontBody.variable
-        )}
-      >
+      <body className={cn("antialiased", fontHeading.variable, fontBody.variable)}>
         <ClerkProvider>
           <ThemeProvider attribute={"class"} defaultTheme={"light"} disableTransitionOnChange enableSystem>
             <TRPCReactProvider cookies={cookies().toString()}>
               <div className="flex flex-col min-h-screen">
-              <header className="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
-                <Link href="#" className="flex items-center gap-2 text-lg font-semibold md:text-base" prefetch={false}>
-                  <MountainIcon className="w-6 h-6" />
-                  <span className="text-lg font-semibold">The Caffeinated Codebase</span>
-                </Link>
-                <nav className="hidden gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 ml-auto">
-                    <Link href="#" className="font-bold" prefetch={false}>
+                <header className="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
+                  <Link
+                    href="#"
+                    className="flex items-center gap-2 text-lg font-semibold md:text-base"
+                    prefetch={false}
+                  >
+                    <MountainIcon className="w-6 h-6" />
+                    <span className="text-lg font-semibold">The Caffeinated Codebase</span>
+                  </Link>
+                  <nav className="hidden gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6 ml-auto">
+                    <Link href="/" className="font-bold" prefetch={false}>
                       Home
                     </Link>
-                    <Link href="#" className="text-muted-foreground" prefetch={false}>
+                    <Link href="/about" className="text-muted-foreground" prefetch={false}>
                       About
-                    </Link>
-                    <Link href="#" className="text-muted-foreground" prefetch={false}>
-                      Contact
                     </Link>
                     <SignedIn>
                       <UserButton />
                     </SignedIn>
                   </nav>
                 </header>
-                <main className="flex-grow">
-                {children}
-                </main>
+                <main className="flex-grow">{children}</main>
                 <footer className="bg-muted py-6 px-4 md:px-6 shrink-0">
                   <div className="container mx-auto flex flex-col items-center justify-between gap-4 md:flex-row">
                     <p className="text-sm text-muted-foreground">&copy; 2024 Acme Inc. All rights reserved.</p>
@@ -119,7 +109,6 @@ function MountainIcon(props: React.SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
-
 
 function ShareIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
