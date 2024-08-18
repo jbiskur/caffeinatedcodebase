@@ -2,19 +2,36 @@ import { Blockquote } from "@/components/ui/typography/blockquote"
 import { H1 } from "@/components/ui/typography/h1"
 import { P } from "@/components/ui/typography/p"
 import { Li, Ul } from "@/components/ui/typography/un-ordered-list"
+import { faGithub, faLinkedin, faTwitter } from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import Image from "next/image"
+import Link from "next/link"
 
 export default function About() {
   return (
     <div>
       <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid gap-8 grid-flow-col">
-          <div className="w-80 float-left">
+          <div className="w-80 float-left space-y-4">
             <div className="relative w-80 h-80 overflow-hidden rounded-full">
-              <img
+              <Image
                 src="/images/portrait_jb_bw.jpg"
                 alt="Julius á Rógvi Biskopstø"
+                width={150}
+                height={150}
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full object-cover"
               />
+            </div>
+            <div className="flex flex-row gap-4 justify-center">
+              <Link href="https://www.linkedin.com/in/jbiskur/">
+                <FontAwesomeIcon icon={faLinkedin} className="text-4xl" />
+              </Link>
+              <Link href="https://github.com/jbiskur">
+                <FontAwesomeIcon icon={faGithub} className="text-4xl" />
+              </Link>
+              <Link href="https://twitter.com/jbiskur">
+                <FontAwesomeIcon icon={faTwitter} className="text-4xl" />
+              </Link>
             </div>
           </div>
           <div className="flex items-start">

@@ -29,6 +29,7 @@
     "@flowcore/sdk-nextjs-backend": "^1.2.0",
     "@flowcore/sdk-transformer-core": "^1.6.0",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
     "@fortawesome/pro-light-svg-icons": "^6.6.0",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@hookform/resolvers": "^3.3.3",
