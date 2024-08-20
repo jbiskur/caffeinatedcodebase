@@ -2,6 +2,7 @@ import { type MDEditorProps } from "@uiw/react-md-editor"
 import dynamicInport from "next/dynamic"
 import { type FC } from "react"
 import rehypeSanitize from "rehype-sanitize"
+import { markdownComponents } from "./md-viewer"
 
 const MDEditor = dynamicInport(() => import("@uiw/react-md-editor"), {
   ssr: false,
@@ -28,6 +29,7 @@ export const MarkdownEditor: FC<MarkdownEditorProps> = ({ name, value, onChange,
         })
       }
       previewOptions={{
+        components: markdownComponents,
         rehypePlugins: [[rehypeSanitize]],
       }}
       {...props}

@@ -1,25 +1,24 @@
-import { and, eq } from "drizzle-orm"
-import { z } from "zod"
-
-import { type BlogPostWithAssociation } from "@/contracts/blog-posts/blog-post-with-association"
+import { BlogPost } from "@/contracts/blog-posts/blog-post"
 import { db } from "@/database"
 import { blogPosts } from "@/database/schemas"
 import { protectedProcedure } from "@/server/api/trpc"
 import { BlogPostService } from "@/server/services/blog-post.service"
+import { and, eq } from "drizzle-orm"
+import { z } from "zod"
 
 const inputSchema = z.object({
-  id: z.string(),
+  slug: z.string(),
 })
 
-export const getBlogPostIndividualProcedure = protectedProcedure
+export const getBlogPostBySlugProcedure = protectedProcedure
   .input(inputSchema)
-  .query(async ({ input }): Promise<BlogPostWithAssociation> => {
+  .query(async ({ input }): Promise<BlogPost> => {
     const blogPostResult = await db.query.blogPosts.findFirst({
-      where: and(eq(blogPosts.id, input.id), eq(blogPosts.archived, false)),
+      where: and(eq(blogPosts.slug, input.slug), eq(blogPosts.archived, false)),
     })
 
     if (!blogPostResult) {
-      throw new Error(`No blogPost found with the provided ID: ${input.id}`)
+      throw new Error(`No blogPost found with the provided slug: ${input.slug}`)
     }
 
     const blogPost = new BlogPostService(blogPostResult)

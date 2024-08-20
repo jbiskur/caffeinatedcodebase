@@ -5,18 +5,24 @@ import { webhookClient } from "@/app/api/transform/flowcore-clients"
 import { type TrackedMetadata } from "../../lib/events/tracked-webhook"
 
 export const blogPost = {
-  flowType: "blogPost.0",
+  flowType: "blog.post.0",
   eventType: {
-    created: "blogPost.created.0",
-    updated: "blogPost.updated.0",
-    archived: "blogPost.archived.0",
+    created: "blog.post.created.0",
+    updated: "blog.post.updated.0",
+    archived: "blog.post.archived.0",
   },
 } as const
 
 export const BlogPostEventCreatedPayload = z.object({
   id: z.string(),
-  name: z.string(),
-  //Fill in the fields that are required to create a new Blog Post
+  title: z.string(),
+  summary: z.string(),
+  slug: z.string(),
+  content: z.string(),
+  tags: z.array(z.string()),
+  published: z.boolean().default(false),
+  author: z.string(),
+  archived: z.boolean().default(false),
 })
 
 export const BlogPostEventUpdatedPayload = BlogPostEventCreatedPayload.partial().required({

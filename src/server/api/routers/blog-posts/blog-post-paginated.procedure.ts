@@ -23,6 +23,9 @@ export const getBlogPostListProcedure = protectedProcedure
         case "createdAt":
           orderBy = sorting.desc ? [desc(blogPosts.id)] : [asc(blogPosts.id)]
           break
+        case "updatedAt":
+          orderBy = sorting.desc ? [desc(blogPosts.updatedAt)] : [asc(blogPosts.updatedAt)]
+          break
         default:
           orderBy = [desc(blogPosts.createdAt)]
           break

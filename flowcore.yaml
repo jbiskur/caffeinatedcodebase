@@ -6,14 +6,14 @@ dataCore:
   isPublic: false
   description: This data core contains the data for the Caffeinatedcodebase application
   flowTypes:
-    blog-post.0:
+    blog.post.0:
       description: Blog posts for the caffeinated codebase website
       eventTypes:
-        blog-post.created.0:
+        blog.post.created.0:
           description: blog-post created event
-        blog-post.updated.0:
+        blog.post.updated.0:
           description: blog-post updated event
-        blog-post.archived.0:
+        blog.post.archived.0:
           description: blog-post archived event
 scenario:
   name: caffeinatedcodebase
@@ -22,11 +22,11 @@ scenario:
     blog-posts:
       description: blog-posts transformer
       dataCore: caffeinatedcodebase
-      flowType: blog-post.0
+      flowType: blog.post.0
       events:
-        - blog-post.created.0
-        - blog-post.updated.0
-        - blog-post.archived.0
+        - blog.post.created.0
+        - blog.post.updated.0
+        - blog.post.archived.0
       parameters:
         - name: PROXY_ENDPOINT
           type: manual

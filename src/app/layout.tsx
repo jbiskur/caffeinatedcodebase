@@ -50,7 +50,7 @@ export default async function RootLayout({
               <div className="flex flex-col min-h-screen">
                 <header className="flex items-center h-16 px-4 border-b shrink-0 md:px-6">
                   <Link
-                    href="#"
+                    href="/"
                     className="flex items-center gap-2 text-lg font-semibold md:text-base"
                     prefetch={false}
                   >

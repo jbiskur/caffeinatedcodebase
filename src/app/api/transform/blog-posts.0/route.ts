@@ -1,8 +1,8 @@
-import blogPostCreated from "@/app/api/transform/blog-posts.0/route-blog-post-created"
 import { eventTransformClient } from "@/app/api/transform/flowcore-clients"
 import { blogPost } from "@/contracts/events/blog-post"
 
 import blogPostArchived from "./route-blog-post-archived"
+import blogPostCreated from "./route-blog-post-created"
 import blogPostUpdated from "./route-blog-post-updated"
 
 const eventTransformer = eventTransformClient(blogPost, {

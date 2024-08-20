@@ -22,8 +22,16 @@ export class BlogPostService {
   private rowToBlogPost(row: InferSelectModel<typeof blogPosts>): BlogPost {
     return {
       id: row.id,
-      name: row.name ?? "",
+      title: row.title ?? "",
+      slug: row.slug ?? "",
+      summary: row.summary ?? "",
+      content: row.content ?? "",
       createdAt: row.createdAt ?? "",
+      updatedAt: row.updatedAt ?? "",
+      published: row.published ?? false,
+      publishedAt: row.publishedAt ?? "",
+      author: row.author ?? "",
+      archived: row.archived ?? false,
     }
   }
 }

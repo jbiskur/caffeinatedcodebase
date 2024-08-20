@@ -1,8 +1,8 @@
-import {type PropsWithChildren} from "react";
+import {FC, type PropsWithChildren} from "react";
 import {twMerge} from "tailwind-merge";
 
 
-export function TypographyH3({ className, children }: PropsWithChildren & HTMLElement) {
+export const H3: FC<PropsWithChildren & { className?:string }> = ({ children, className }) => {
   return (
     <h3 className={twMerge("scroll-m-20 text-2xl font-semibold tracking-tight", className)}>
       {children}
