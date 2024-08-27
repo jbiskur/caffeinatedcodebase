@@ -71,19 +71,10 @@ export default async function RootLayout({
                 </header>
                 <main className="flex-grow">{children}</main>
                 <footer className="bg-muted py-6 px-4 md:px-6 shrink-0">
-                  <div className="container mx-auto flex flex-col items-center justify-between gap-4 md:flex-row">
-                    <p className="text-sm text-muted-foreground">&copy; 2024 Acme Inc. All rights reserved.</p>
-                    <nav className="flex items-center gap-4 text-sm">
-                      <Link href="#" className="text-muted-foreground hover:underline" prefetch={false}>
-                        Terms of Service
-                      </Link>
-                      <Link href="#" className="text-muted-foreground hover:underline" prefetch={false}>
-                        Privacy Policy
-                      </Link>
-                      <Link href="#" className="text-muted-foreground hover:underline" prefetch={false}>
-                        Contact
-                      </Link>
-                    </nav>
+                  <div className="container mx-auto flex flex-col items-center justify-center gap-4 md:flex-row">
+                    <p className="text-sm text-muted-foreground">
+                      &copy; 2024 The Caffeinated Codebase. All rights reserved.
+                    </p>
                   </div>
                 </footer>
               </div>
