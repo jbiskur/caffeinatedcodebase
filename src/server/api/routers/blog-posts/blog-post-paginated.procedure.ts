@@ -5,10 +5,10 @@ import { type ScrollBlogPostResult } from "@/contracts/blog-posts/scroll-blog-po
 import { SearchableScrollPaginationInput } from "@/contracts/pagination/scroll"
 import { db } from "@/database"
 import { blogPosts } from "@/database/schemas"
-import { protectedProcedure } from "@/server/api/trpc"
+import { publicProcedure } from "@/server/api/trpc"
 import { BlogPostService } from "@/server/services/blog-post.service"
 
-export const getBlogPostListProcedure = protectedProcedure
+export const getBlogPostListProcedure = publicProcedure
   .input(SearchableScrollPaginationInput)
   .query(async ({ input }): Promise<ScrollBlogPostResult> => {
     const limit = input.limit ?? 50

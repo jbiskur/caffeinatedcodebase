@@ -11,7 +11,7 @@ export default function About() {
   return (
     <div>
       <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid gap-8 grid-flow-col">
+        <div className="grid gap-8 grid-flow-row lg:grid-flow-col">
           <div className="w-80 float-left space-y-4">
             <div className="relative w-80 h-80 overflow-hidden rounded-full">
               <Image

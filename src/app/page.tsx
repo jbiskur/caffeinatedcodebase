@@ -1,19 +1,22 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
 import { SignedIn } from "@clerk/nextjs"
-import { faFilePlus, faSearch } from "@fortawesome/pro-light-svg-icons"
+import { faFilePlus } from "@fortawesome/pro-light-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import Link from "next/link"
+import { twMerge } from "tailwind-merge"
 import { api } from "../trpc/server"
 
 export default async function Home() {
   const blogs = await api.blogPosts.list.query({})
 
-  console.log(blogs)
-
   return (
-    <div className="container mx-auto px-4 py-12 sm:px-6 lg:px-8 grid md:grid-cols-[2fr_1fr] gap-8">
+    <div
+      className={twMerge(
+        "container mx-auto px-4 py-12 sm:px-6 lg:px-8 grid gap-8",
+        false ? "lg:grid-cols-[2fr_1fr]" : "",
+      )}
+    >
       <div>
         <div className="grid gap-4">
           {blogs.items.map((blog) => (
@@ -37,14 +40,14 @@ export default async function Home() {
             </div>
           ))}
           {/* {visibleBlogs < blogs.length && ( */}
-          <div className="flex justify-center">
+          {/* <div className="flex justify-center">
             <Button>Load More</Button>
-          </div>
+          </div> */}
           {/* )} */}
         </div>
       </div>
-      <div className="flex flex-col gap-4">
-        <SignedIn>
+      <SignedIn>
+        <div className="flex flex-col gap-4">
           <Card>
             <CardHeader>
               <CardTitle>Admin</CardTitle>
@@ -59,8 +62,7 @@ export default async function Home() {
               </Link>
             </CardContent>
           </Card>
-        </SignedIn>
-        <Card>
+          {/* <Card>
           <CardHeader>
             <CardTitle>Search</CardTitle>
             <CardDescription>Search for blog posts on the site.</CardDescription>
@@ -72,8 +74,9 @@ export default async function Home() {
               <span className="sr-only">Search</span>
             </Button>
           </CardContent>
-        </Card>
-      </div>
+        </Card> */}
+        </div>
+      </SignedIn>
     </div>
   )
 }

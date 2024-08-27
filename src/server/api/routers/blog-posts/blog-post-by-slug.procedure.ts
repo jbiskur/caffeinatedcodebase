@@ -1,7 +1,7 @@
 import { BlogPost } from "@/contracts/blog-posts/blog-post"
 import { db } from "@/database"
 import { blogPosts } from "@/database/schemas"
-import { protectedProcedure } from "@/server/api/trpc"
+import { publicProcedure } from "@/server/api/trpc"
 import { BlogPostService } from "@/server/services/blog-post.service"
 import { and, eq } from "drizzle-orm"
 import { z } from "zod"
@@ -10,7 +10,7 @@ const inputSchema = z.object({
   slug: z.string(),
 })
 
-export const getBlogPostBySlugProcedure = protectedProcedure
+export const getBlogPostBySlugProcedure = publicProcedure
   .input(inputSchema)
   .query(async ({ input }): Promise<BlogPost> => {
     const blogPostResult = await db.query.blogPosts.findFirst({

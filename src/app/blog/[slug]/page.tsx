@@ -41,9 +41,10 @@ export default async function SignInPage({ params }: { params: { slug: string } 
         <span />
         <Card className="p-4">
           <CardContent className="grid gap-4">
-            {recentBlogPosts.map((blogPost) => (
-              <div key={blogPost.id} className="flex items-center justify-between">
-                <div className="flex items-top gap-2">
+            {recentBlogPosts.length > 0 ?
+              recentBlogPosts.map((blogPost) => (
+                <div key={blogPost.id} className="flex items-center justify-between">
+                  <div className="flex items-top gap-2">
                   <div>
                     <div className="flex flex-col">
                       <h3 className="text-lg font-semibold">{blogPost.title}</h3>
@@ -55,7 +56,9 @@ export default async function SignInPage({ params }: { params: { slug: string } 
                   </div>
                 </div>
               </div>
-            ))}
+            )) : (
+              <div>No recent posts</div>
+            )}
           </CardContent>
           <CardFooter className="flex justify-end">
             <Link href="/" className="text-muted-foreground hover:underline" prefetch={false}>
