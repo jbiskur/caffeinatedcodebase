@@ -19,6 +19,7 @@ export const env = createEnv({
     NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
     KV_URL: z.string(),
     KV_KEY_PATTERN: z.string(),
+    SITE_URL: z.string().url(),
   },
 
   /**
@@ -48,6 +49,7 @@ export const env = createEnv({
     NODE_ENV: process.env.NODE_ENV,
     KV_URL: process.env.KV_URL,
     KV_KEY_PATTERN: process.env.KV_KEY_PATTERN,
+    SITE_URL: process.env.SITE_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

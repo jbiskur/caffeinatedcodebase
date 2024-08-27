@@ -1,10 +1,11 @@
 import MarkdownViewer from "@/components/md-viewer"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { api } from "@/trpc/server"
-import { BookOpenIcon, ShareIcon } from "lucide-react"
+import { BookOpenIcon } from "lucide-react"
 import Link from "next/link"
+import { ShareBlog } from "./share-blog.component"
+import { env } from "@/env"
 
 export default async function SignInPage({ params }: { params: { slug: string } }) {
   const blogPost = await api.blogPosts.bySlug.query({ slug: params.slug })
@@ -22,32 +23,15 @@ export default async function SignInPage({ params }: { params: { slug: string } 
             <div className="flex items-center space-x-2">
               <Avatar className="h-6 w-6 rounded-full">
                 {/* <AvatarImage src="/placeholder-user.jpg" alt="@shadcn" /> */}
-                <AvatarFallback>SC</AvatarFallback>
+                <AvatarFallback>JB</AvatarFallback>
               </Avatar>
-              <span className="text-sm font-medium">Samantha Chen</span>
+              <span className="text-sm font-medium">Julius á Rógvi Biskopstø</span>
             </div>
-            <span className="text-sm">May 15, 2023</span>
+            <span className="text-sm">{new Date(blogPost.createdAt).toLocaleDateString()}</span>
           </div>
         </div>
         <MarkdownViewer source={blogPost.content} />
-        <div className="flex items-center justify-center gap-4 mt-8">
-          <Button variant="ghost" size="icon">
-            <ShareIcon className="w-5 h-5" />
-            <span className="sr-only">Share on Twitter</span>
-          </Button>
-          <Button variant="ghost" size="icon">
-            <ShareIcon className="w-5 h-5" />
-            <span className="sr-only">Share on Facebook</span>
-          </Button>
-          <Button variant="ghost" size="icon">
-            <ShareIcon className="w-5 h-5" />
-            <span className="sr-only">Share on LinkedIn</span>
-          </Button>
-          <Button variant="ghost" size="icon">
-            <ShareIcon className="w-5 h-5" />
-            <span className="sr-only">Share via Email</span>
-          </Button>
-        </div>
+        <ShareBlog blogPost={blogPost} siteUrl={env.SITE_URL} />
       </article>
       <div className="space-y-4">
         <div className="flex items-center space-x-2">

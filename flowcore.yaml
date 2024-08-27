@@ -15,12 +15,24 @@ dataCore:
           description: blog-post updated event
         blog.post.archived.0:
           description: blog-post archived event
+    image.0:
+      description: Image data for the caffeinated codebase website
+      eventTypes:
+        image.created.0:
+          description: image created event
+        image.archived.0:
+          description: image archived event
+    settings.0:
+      description: Settings for the caffeinated codebase website
+      eventTypes:
+        settings.updated.0:
+          description: settings updated event
 scenario:
   name: caffeinatedcodebase
   description: This scenario is used for development of the Caffeinatedcodebase application
   transformers:
     blog-posts:
-      description: blog-posts transformer
+      description: blog-posts transformer2
       dataCore: caffeinatedcodebase
       flowType: blog.post.0
       events:
